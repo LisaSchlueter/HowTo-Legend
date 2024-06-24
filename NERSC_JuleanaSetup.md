@@ -49,3 +49,18 @@ To be able to load Juleana modules run:
 julia> using Pkg; pkg"registry add General https://github.com/legend-exp/LegendJuliaRegistry.git"
 ```
 This needs to be done only once. For reference see [confluence](https://legend-exp.atlassian.net/wiki/spaces/LEGEND/pages/494632973/Julia+Software+Stack#The-LEGEND-Julia-package-registry).
+
+## Accessing LEGEND Data 
+
+Add the following in your `~/.bashrc` to use the most up-to-date data production: 
+``` bash 
+export LEGEND_DATA_CONFIG="/global/cfs/projectdirs/m2676/data/lngs/l200/juleana/current/config.json"
+```
+This tells `LEGENDDataManagement.jl` where to find the data for the *current* production. 
+
+To use VSCode with the julia extension, it is also necessary to add the following to your VSCode settings; `settings.json`: 
+``` json
+"terminal.integrated.env.linux": {
+            "LEGEND_DATA_CONFIG": "/global/cfs/projectdirs/m2676/data/lngs/l200/juleana/current/config.json"
+        },
+```
