@@ -23,12 +23,15 @@ Example `config.json` file:
                 "tier/jllog": "$_/generated/jllog/",
                 "tier/jlreport": "$_/generated/jlreport/",
                 "tier/jlplt": "$_/generated/jlplt/",
-
                 "par": "$_/generated/jlpar/"
             }
         }
     }
 }
+```
+* link direcotry containing the machine learning rpars (right now in `/ptmp/oschulz/...`) to our own processing direcory: 
+``` 
+ln -s /ptmp/oschulz/legend/data/l200/current/generated/jlpar/rpars/ml/ /ptmp/$USER/l200/current/generated/jlpar/rpars/ml/ 
 ```
 ## Clone legend-metadata (metadata configs)
 * Clone [legend-metadata](https://github.com/legend-exp/legend-metadata) in the same directory as the `config.json` file (see above). Also load all submodules. Use `dev` branch. 
@@ -99,8 +102,9 @@ To give the workers computing power, run the bash script `startjlworkers.sh` tha
 The hardware configuration of the server can be found online, e.g. for [raven](https://docs.mpcdf.mpg.de/doc/computing/raven-user-guide.html): 
 * 1592 (CPU) compute nodes (of course, they are not all available)
 * Each node:
-    * min. 256 GB memory (RAM)
+    * min. 256 GB memory (RAM) 
     * 72 CPU cores with 2 threads each
+    * Each node should have 4-8 GB per task 
 ### Useful bash commands when using SLURM:
 * `squeue -u <username>` lists your jobs, job-id and their status
 * `scancel <jobid>` cancel job
