@@ -77,16 +77,17 @@ This will open new workers. No actual CPU cores are assigned to these workers ye
 To give the workers computing power, run the bash script `startjlworkers.sh` that is in your home directory. The script can be run multiple times to add additional nodes to workers. The default number of nodes is defined in the processing config. The SLURM-relevant parts looks like this: 
 ```
         "slurm_settings": [
-            "--time=04:00:00",
+            "--time=01:00:00",
             "--mem-bind=local",
             "--threads-per-core=1",
             "--cpu-bind=cores",
             "--nodes=32",
             "--ntasks-per-node=36",
             "--cpus-per-task=2",
-            "--mem=256GB"
+            "--mem=234GB"
         ]
 ```
+
 * `--time` 
 * `--mem-bind` 
 * `--threads-per-code` 
