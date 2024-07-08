@@ -15,7 +15,6 @@ Example `config.json` file:
         "l200": {
             "paths": {
                 "metadata": "$_/legend-metadata/",
-
                 "tier": "$_/generated/tier/",
                 "tier/raw": "/ptmp/oschulz/legend/data/l200/raw-compressed",
                 "tier/jlpeaks": "/ptmp/oschulz/legend/data/l200/current/generated/tier/jlpeaks",
@@ -34,7 +33,7 @@ Example `config.json` file:
 ln -s /ptmp/oschulz/legend/data/l200/current/generated/jlpar/rpars/ml/ /ptmp/$USER/l200/current/generated/jlpar/rpars/
 ```
 ## Clone legend-metadata (metadata configs)
-* Clone [legend-metadata](https://github.com/legend-exp/legend-metadata) in the same directory as the `config.json` file (see above). Also load all submodules. Use `dev` branch. 
+* Clone [legend-metadata](https://github.com/legend-exp/legend-metadata) in the same directory as the `config.json` file (see above). Also load all submodules. Use `dev` for branch `"jldataprod/config/"`. 
 
 * The directory `legend-metadata/jldataprod/config/` contains configuration files for the juleana data processing. These files containts instructions for the processors, for example file calibration lines are supposed to be fit. 
 
