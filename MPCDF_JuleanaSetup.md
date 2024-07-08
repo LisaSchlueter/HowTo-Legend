@@ -86,7 +86,7 @@ esac
 Run `exec bash` and attempt to open julia by running the command `julia` to check that it has been successfully installed. 
 
 ## Setup LEGEND Julia Registry 
-Execute the following command to set up the LEGEND Julia registry: 
+Execute the following command in a julia session to set up the LEGEND Julia registry: 
 ``` julia
 include(download("https://raw.githubusercontent.com/legend-exp/legend-julia-tutorial/main/legend_julia_setup.jl"))
 ```
