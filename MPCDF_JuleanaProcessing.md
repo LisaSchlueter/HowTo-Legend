@@ -77,18 +77,18 @@ This will open new workers. No actual CPU cores are assigned to these workers ye
 To give the workers computing power, run the bash script `startjlworkers.sh` that is in your home directory. The script can be run multiple times to add additional nodes to workers. The default number of nodes is defined in the processing config. The SLURM-relevant parts looks like this: 
 ```
         "slurm_settings": [
-            "--time=04:00:00",
+            "--time=01:00:00",
             "--mem-bind=local",
             "--threads-per-core=1",
             "--cpu-bind=cores",
             "--nodes=32",
             "--ntasks-per-node=36",
             "--cpus-per-task=2",
-            "--mem=256GB"
+            "--mem=234GB"
         ]
 ```
-* `--time` 
-* `--mem-bind` 
+* `--time` max. time allocated. Clock starts after job is scheduled. When time has passed, job is cancelled. 
+* `--mem-bind`  
 * `--threads-per-code` 
 * `--cpu-bind`
 * `--nodes` number of nodes to be used. should be a natural number.
@@ -96,7 +96,7 @@ To give the workers computing power, run the bash script `startjlworkers.sh` tha
 * `--cpus-per-task` number of CPU  per task
     * *Comment:* `ntasks-per-node` x `cpus-per-task` *gives the number of CPUs per node. This value should match the hardware configuration, e.g. raven has 72 CPU per node.* 
 * `--mem` memory RAM per node. 
-    * *Should match hardware configuration (256 GB for raven)*
+    * *Should match hardware configuration (234 GB for raven)*
 
 The hardware configuration of the server can be found online, e.g. for [raven](https://docs.mpcdf.mpg.de/doc/computing/raven-user-guide.html): 
 * 1592 (CPU) compute nodes (of course, they are not all available)
