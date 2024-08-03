@@ -2,44 +2,47 @@
 This is an explaination of how to set up the Juleana analysis at the MPCDF. 
  
 ## Using ssh 
-MPCDF has two supercomputers; **raven** and **cobra**. 
+MPCDF has two supercomputers; **raven** and **viper**. 
 These machines can be accessed within the MPCDF network. 
 To access them from outside, you need to use a proxy jump through a gate. 
 
 You can do this by putting the following code in your ssh config. 
 
 ``` config
-Host cobra
-	HostName cobra.mpcdf.mpg.de
-	User <username>
-	ProxyCommand ssh -W %h:%p gate1.mpcdf.mpg.de 2>/dev/null
-	PubkeyAuthentication no
-	ForwardAgent yes
-	ServerAliveInterval 120
-	GSSAPIAuthentication yes
-	GSSAPIDelegateCredentials yes
-
 Host raven
-	HostName raven.mpcdf.mpg.de
-	User <username>
-	ProxyCommand ssh -W %h:%p gate1.mpcdf.mpg.de 2>/dev/null
-	PubkeyAuthentication no
-	ForwardAgent yes
-	ServerAliveInterval 120
-	GSSAPIAuthentication yes
-	GSSAPIDelegateCredentials yes
 
-Host gate1.mpcdf.mpg.de
-	User <username>
-	GSSAPIAuthentication yes
-	GSSAPIDelegateCredentials yes
-	ControlMaster auto
-	ControlPath ~/.ssh/control:%h:%p:%r
+Host viper
+
+# SSH configuration taken from https://docs.mpcdf.mpg.de/faq/
+
+# Correctly resolve short names of gateway machines and HPC nodes
+Match originalhost gate*,raven*,viper*
+    CanonicalDomains mpcdf.mpg.de
+    CanonicalizeFallbackLocal no
+    CanonicalizeHostname yes
+
+# Keep a tunnel open for the day when accessing the gate machines
+Match canonical host gate*
+    User <USERNAME>
+    Compression yes
+    ServerAliveInterval 120
+    ControlMaster auto
+    ControlPersist 10h
+    ControlPath ~/.ssh/master-mpcdf-%C
+
+# Keep a tunnel open for the day when accessing the HPC nodes
+Match canonical host raven*,viper*
+    User <USERNAME>
+    Compression yes
+    ControlMaster auto
+    ControlPersist 10h
+    ControlPath ~/.ssh/master-mpcdf-%C
+    # OpenSSH >=7.3
+    ProxyJump gate1
 ```
 More information about MPCDF can be found here: 
-[cobra](https://www.mpcdf.mpg.de/services/supercomputing/cobra)
-
-[raven](https://www.mpcdf.mpg.de/services/supercomputing/raven)
+- [viper](https://www.mpcdf.mpg.de/services/supercomputing/viper)
+- [raven](https://www.mpcdf.mpg.de/services/supercomputing/raven)
 
 ## Storage
 There is limited storage in your home directory, with a limited number of files.
@@ -120,7 +123,7 @@ if haskey(ENV, "NERSC_HOST")
         permutter_hsn_addr = Sockets.IPv4(filter(!isnothing, match.(r"inet (.*)/.*hsn0", readlines(`ip a show`)))[1].captures[1])
         Sockets.getipaddr() = permutter_hsn_addr
     end
-elseif get(ENV, "CLUSTER", "") == "COBRA"
+elseif get(ENV, "CLUSTER", "") in ["RAVEN","VIPER"]
     @eval Module() begin
         import Sockets
         cobra_infiniband_addr = Sockets.IPv4(filter(!isnothing, match.(r"inet (.*)/.*ib0", readlines(`ip a show`)))[1].captures[1])
