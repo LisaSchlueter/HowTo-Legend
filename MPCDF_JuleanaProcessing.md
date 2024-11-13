@@ -119,7 +119,7 @@ If run from a regular bash, the processing will be terminated if the connection 
 * `tmux a -t <session-name` attach to a particular session
 * `Ctrl` + `b` `d` to exit (detach from) a session
 * `Ctrl` + `b` `c` create new window within a session
-
+* `Ctrl` + `b` `:`, then type `set -g mouse` to enable mouse
 
     
 
