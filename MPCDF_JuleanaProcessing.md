@@ -98,11 +98,18 @@ To give the workers computing power, run the bash script `startjlworkers.sh` tha
 * `--mem` memory RAM per node. 
     * *Should match hardware configuration (234 GB for raven)*
 
-The hardware configuration of the server can be found online, e.g. for [raven](https://docs.mpcdf.mpg.de/doc/computing/raven-user-guide.html): 
+The hardware configuration of the server can be found online, e.g. 
+### [raven](https://docs.mpcdf.mpg.de/doc/computing/raven-user-guide.html): 
 * 1592 (CPU) compute nodes (of course, they are not all available)
 * Each node:
     * min. 256 GB memory (RAM) 
     * 72 CPU cores with 2 threads each
+    * Each node should have 4-8 GB per task 
+### [viper](https://docs.mpcdf.mpg.de/doc/computing/viper-user-guide.html)
+* 768 (CPU) compute nodes (of course, they are not all available)
+* Each node:
+    * min. 512 GB memory (RAM) 
+    * 128 CPU cores with 2 threads each
     * Each node should have 4-8 GB per task 
 ### Useful bash commands when using SLURM:
 * `squeue -u <username>` lists your jobs, job-id and their status
